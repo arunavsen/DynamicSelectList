@@ -51,4 +51,40 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#lstCountry').change(function() {
+                var selectedCountry = $('#lstCountry').val();
+
+                var citySelect = $('#lstCity');
+                citySelect.empty();
+
+                if (selectedCountry != null && selectedCountry != '') {
+                    $.getJSON('@Url.Action("GetCities")',
+                        { CountryCode: selectedCountry },
+                        function(cities) {
+                            if (cities != null && !jQuery.isEmptyObject(cities)) {
+                                citySelect.append($('<option/>',
+                                    {
+                                        value: null,
+                                        text: "Select City"
+                                    }));
+
+                                $.each(cities,
+                                    function(index, city) {
+                                        citySelect.append($('<option/>',
+                                            {
+                                                value: city.value,
+                                                text: city.text
+                                            }));
+                                    });
+                            };
+
+
+                        });
+                }
+            });
+        });
+    </script>
 }

@@ -57,6 +57,24 @@ namespace DynamicSelectList.Controllers
             return View(CustomerVM);
         }
 
+        public ActionResult GetCities(string countryCode)
+        {
+            if (!string.IsNullOrWhiteSpace(countryCode) && countryCode.Length == 3)
+            {
+                List<SelectListItem> citiesSet = _db.Cities.Where(c => c.CountryCode == countryCode)
+                    .OrderBy(c => c.Name)
+                    .Select(n => new SelectListItem
+                    {
+                        Value = n.Code,
+                        Text = n.Name
+                    }).ToList();
+
+                return Json(citiesSet);
+            }
+
+            return null;
+        }
+
         public IActionResult Privacy()
         {
             return View();
