@@ -15,7 +15,7 @@ namespace DynamicSelectList.Models
         [Required]
         [MaxLength(75)]
         public string Name { get; set; }
-        [ForeignKey("Cointry")]
+        [ForeignKey("Country")]
         public string CountryCode { get; set; }
         public virtual Country Country { get; set; }
     }
