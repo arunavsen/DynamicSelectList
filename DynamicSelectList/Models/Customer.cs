@@ -14,15 +14,18 @@ namespace DynamicSelectList.Models
         public int CustomerId { get; set; }
 
         [Required]
+        [DisplayName("First Name")]
         [MaxLength(75)]
         public string FirstName { get; set; }
 
         [Required]
         [MaxLength(75)]
+        [DisplayName("Last Name")]
         public string LastName { get; set; }
 
         [Required]
         [MaxLength(100)]
+        [DisplayName("Email")]
         [DataType(DataType.EmailAddress,ErrorMessage = "Email is not valid")]
         public string EmailId { get; set; }
 

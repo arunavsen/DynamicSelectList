@@ -33,7 +33,7 @@ namespace DynamicSelectList.Controllers
         {
             var customerList = _db.Customers
                 .Include(x=>x.Country)
-                .Include(x=>x.Country)
+                .Include(x=>x.City)
                 .ToList();
             return View(customerList);
         }

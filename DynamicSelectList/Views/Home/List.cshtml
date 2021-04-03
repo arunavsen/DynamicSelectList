@@ -44,10 +44,10 @@
                 @Html.DisplayFor(modelItem => item.EmailId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Country.Code)
+                @Html.DisplayFor(modelItem => item.Country.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.City.Code)
+                @Html.DisplayFor(modelItem => item.City.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.CustomerId">Edit</a> |
