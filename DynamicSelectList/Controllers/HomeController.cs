@@ -57,6 +57,7 @@ namespace DynamicSelectList.Controllers
             return View(CustomerVM);
         }
 
+        [HttpGet]
         public ActionResult GetCities(string countryCode)
         {
             if (!string.IsNullOrWhiteSpace(countryCode) && countryCode.Length == 3)
@@ -73,6 +74,15 @@ namespace DynamicSelectList.Controllers
             }
 
             return null;
+        }
+
+        [HttpPost]
+        public IActionResult CreateCustomer(CustomerViewModel model)
+        {
+            _db.Customers.Add(model.Customer);
+            _db.SaveChanges();
+            return RedirectToAction("List");
+
         }
 
         public IActionResult Privacy()
