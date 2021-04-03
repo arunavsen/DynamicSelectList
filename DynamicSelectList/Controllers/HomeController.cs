@@ -7,6 +7,8 @@ using DynamicSelectList.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using DynamicSelectList.Models;
+using DynamicSelectList.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace DynamicSelectList.Controllers
@@ -34,6 +36,25 @@ namespace DynamicSelectList.Controllers
                 .Include(x=>x.Country)
                 .ToList();
             return View(customerList);
+        }
+
+
+        public IActionResult CreateCustomer()
+        {
+            var CustomerVM = new CustomerViewModel();
+
+            CustomerVM.Customer = new Customer();
+
+            List<SelectListItem> countries = _db.Countries.OrderBy(m => m.Name).Select(m => new SelectListItem
+            {
+                Value = m.Code,
+                Text = m.Name
+            }).ToList();
+            CustomerVM.Countries = countries;
+
+            CustomerVM.Cities = new List<SelectListItem>();
+
+            return View(CustomerVM);
         }
 
         public IActionResult Privacy()
